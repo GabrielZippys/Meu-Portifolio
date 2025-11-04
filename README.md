@@ -1,35 +1,36 @@
- Meu Portfólio de Programação
- 
-Bem-vindo ao meu portfólio de programação! Este repositório contém projetos e exemplos do meu trabalho como desenvolvedor. Aqui você encontrará uma variedade de projetos que demonstram minhas habilidades em diferentes linguagens de programação e tecnologias.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Estrutura do Repositório
+## Getting Started
 
-Projetos Web:
+First, run the development server:
 
-Exemplos de sites responsivos.
-Aplicações web utilizando frameworks como React, Angular ou Vue.js.
-Projetos de back-end com Node.js, Express e bancos de dados como MongoDB ou SQL.
-Projetos de Automação:
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-Scripts em Python para automatização de tarefas.
-Ferramentas de linha de comando que desenvolvi para facilitar o fluxo de trabalho.
-Projetos Mobile:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Aplicativos móveis desenvolvidos com React Native ou Flutter.
-Exemplos de integração com APIs e recursos nativos do dispositivo.
-Projetos Open Source:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Contribuições para projetos open-source.
-Repositórios onde sou colaborador ou mantenedor.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-Tecnologias e Ferramentas
+## Learn More
 
-Linguagens: HTML, CSS, JavaScript, Python, TypeScript, etc.
+To learn more about Next.js, take a look at the following resources:
 
-Frameworks e Bibliotecas: React, Angular, Django, Flask, etc.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Bancos de Dados: MySQL, MongoDB, PostgreSQL, SQLite.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Controle de Versão: Git, GitHub.
+## Deploy on Vercel
 
-Metodologias Ágeis: Scrum, Kanban.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
