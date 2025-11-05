@@ -30,13 +30,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="mx-auto max-w-6xl h-full flex items-center justify-between px-6">
               <h1 className="text-lg font-semibold tracking-tight">Gabriel Oliveira</h1>
               <nav className="flex gap-4 text-white/80">
-                <a href="https://www.linkedin.com/in/gabrielzippys/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/gabriel-oliveira-49a5152aa" target="_blank" rel="noopener noreferrer">
                   <FaLinkedin className="hover:text-pink-500 transition" size={20} />
                 </a>
                 <a href="https://github.com/GabrielZippys" target="_blank" rel="noopener noreferrer">
                   <FaGithub className="hover:text-pink-500 transition" size={20} />
                 </a>
-                <a href="mailto:gabriel@example.com">
+                <a href="id1366351@outlook.com">
                   <FaEnvelope className="hover:text-pink-500 transition" size={20} />
                 </a>
               </nav>
