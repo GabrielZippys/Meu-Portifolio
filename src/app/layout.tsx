@@ -30,16 +30,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="mx-auto max-w-6xl h-full flex items-center justify-between px-6">
               <h1 className="text-lg font-semibold tracking-tight">Gabriel Oliveira</h1>
               <nav className="flex gap-4 text-white/80">
-                <a href="https://www.linkedin.com/in/gabriel-oliveira-49a5152aa" target="_blank" rel="noopener noreferrer">
-                  <FaLinkedin className="hover:text-pink-500 transition" size={20} />
-                </a>
-                <a href="https://github.com/GabrielZippys" target="_blank" rel="noopener noreferrer">
-                  <FaGithub className="hover:text-pink-500 transition" size={20} />
-                </a>
-                <a href="id1366351@outlook.com">
-                  <FaEnvelope className="hover:text-pink-500 transition" size={20} />
-                </a>
-              </nav>
+  <a
+    href="https://www.linkedin.com/in/gabriel-oliveira-49a5152aa"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+    title="LinkedIn"
+  >
+    <FaLinkedin className="hover:text-pink-500 transition" size={20} />
+  </a>
+
+  <a
+    href="https://github.com/GabrielZippys"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="GitHub"
+    title="GitHub"
+  >
+    <FaGithub className="hover:text-pink-500 transition" size={20} />
+  </a>
+
+  {/* e-mail correto */}
+  <a
+    href={`mailto:id1366351@outlook.com?subject=${encodeURIComponent(
+      'Contato via portfólio'
+    )}&body=${encodeURIComponent(
+      'Olá Gabriel, tudo bem? Vi seu portfólio e gostaria de conversar sobre...'
+    )}`}
+    aria-label="Enviar e-mail"
+    title="Enviar e-mail"
+  >
+    <FaEnvelope className="hover:text-pink-500 transition" size={20} />
+  </a>
+</nav>
+
             </div>
           </header>
 
