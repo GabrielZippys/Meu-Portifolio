@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, PresentationControls /*, Environment*/ } from '@react-three/drei';
+import { Float, PresentationControls } from '@react-three/drei';
 import { useRef, Suspense } from 'react';
 import * as THREE from 'three';
 
@@ -30,7 +30,7 @@ function Knot() {
 export default function TechCanvas() {
   return (
     <div className="relative w-full h-[460px] sm:h-[560px] md:h-[660px] lg:h-[740px] overflow-visible">
-      {/* glow AGORA ATRÁS do canvas */}
+      {/* glow atrás do canvas */}
       <div
         className="pointer-events-none absolute inset-0 -z-10 blur-3xl opacity-40"
         style={{
@@ -40,24 +40,34 @@ export default function TechCanvas() {
       />
 
       <Canvas
-        className="absolute inset-0 z-10"
+        className="absolute inset-0 z-10 bg-black"        // <- FALLBACK preto no elemento
         dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
-        camera={{ position: [0, 0, 7.2], fov: 50 }}   // 👈 de 4 para ~5.2
-        onCreated={({ gl }) => gl.setClearAlpha(0)}
+        gl={{
+          antialias: true,
+          alpha: true,                                   // fundo transparente (mostra o glow)
+          preserveDrawingBuffer: true,                   // mantém último frame no unmount
+          powerPreference: 'high-performance',
+        }}
+        camera={{ position: [0, 0, 7.2], fov: 50 }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0);                 // alpha 0 (transparente), sem branco
+          gl.setClearAlpha(0);
+        }}
       >
-
-        {/* Se preferir um fundo sólido e evitar qualquer “flash”, descomente: */}
-        {/* <color attach="background" args={['#0b0f14']} /> */}
+        {/* Se preferir fundo sólido dentro do WebGL, use:
+        <color attach="background" args={['#000000']} /> */}
 
         <ambientLight intensity={0.7} />
         <directionalLight position={[3, 4, 5]} intensity={1.2} />
 
-        <PresentationControls global rotation={[0, 0.2, 0]} polar={[-0.3, 0.3]} azimuth={[-0.6, 0.6]}>
+        <PresentationControls
+          global
+          rotation={[0, 0.2, 0]}
+          polar={[-0.3, 0.3]}
+          azimuth={[-0.6, 0.6]}
+        >
           <Suspense fallback={null}>
             <Knot />
-            {/* Evite o “flash branco” inicial: use Environment só se precisar e sem background */}
-            {/* <Environment preset="city" background={false} /> */}
           </Suspense>
         </PresentationControls>
       </Canvas>

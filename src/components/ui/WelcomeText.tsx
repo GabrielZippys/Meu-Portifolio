@@ -16,7 +16,7 @@ const fadeUp: Variants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: easeOutBezier,   // 👈 troca a string por bezier
+      ease: easeOutBezier,
       delay: 0.1 * i,
     },
   }),
@@ -25,11 +25,12 @@ const fadeUp: Variants = {
 export default function WelcomeText() {
   return (
     <section className="relative min-h-[75vh] md:min-h-[85vh] flex items-center overflow-hidden">
+      {/* fundos sutis se você tiver essas utilities no CSS */}
       <div className="absolute inset-0 bg-gradient" />
       <div className="absolute inset-0 bg-grid" />
 
       <div className="relative container mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-        {/* Texto */}
+        {/* Coluna: Texto */}
         <div className="order-2 md:order-1">
           <motion.h1
             variants={fadeUp}
@@ -65,14 +66,16 @@ export default function WelcomeText() {
             >
               Ver Projetos
             </a>
-            <a
-              href="#contato"
-              className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold border border-white/15 text-zinc-200 hover:bg-white/10 transition"
-            >
-              Falar comigo
-            </a>
+           <a
+  href="/sobre"   // era "#sobre"
+  className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold border border-white/15 text-zinc-200 hover:bg-white/10 transition"
+>
+  Sobre mim
+</a>
+
           </motion.div>
 
+          {/* Chips (UL isolada) */}
           <motion.ul
             variants={fadeUp}
             initial="hidden"
@@ -80,18 +83,26 @@ export default function WelcomeText() {
             custom={4}
             className="mt-6 flex flex-wrap gap-2 text-sm text-zinc-400"
           >
-            {['Next.js', 'Tailwind', 'Firebase', 'Automação', 'DataViz'].map(s => (
+            {['Next.js', 'Tailwind', 'Firebase', 'Automação', 'DataViz'].map((s) => (
               <li key={s} className="rounded-full border border-white/10 px-3 py-1">
                 {s}
               </li>
             ))}
-            <TechLogos />
-
           </motion.ul>
+
+          {/* Logos (UL própria, fora da UL de chips) */}
+          <div className="mt-4">
+            <TechLogos />
+          </div>
         </div>
 
-        {/* 3D */}
-        <motion.div variants={fadeUp} initial="hidden" animate="show" className="order-1 md:order-2">
+        {/* Coluna: 3D */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          animate="show"
+          className="order-1 md:order-2"
+        >
           <TechCanvas />
         </motion.div>
       </div>

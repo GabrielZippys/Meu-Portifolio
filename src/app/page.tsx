@@ -1,15 +1,11 @@
-'use client';
+import type { Metadata } from 'next';
+import HomeClient from '@/components/ui/HomeClient';
 
-import { useState } from 'react';
-import LoadingScreen from '@/components/ui/LoadingScreen';
-import WelcomeText from '@/components/ui/WelcomeText';
+export const metadata: Metadata = {
+  title: 'Gabriel Oliveira | Fullstack Dev',
+  description: 'Portfólio com projetos de automações, dashboards e Firebase',
+};
 
-export default function HomePage() {
-  const [ready, setReady] = useState(false);
-  return (
-    <>
-      {!ready && <LoadingScreen onFinish={() => setReady(true)} />}
-      <main className="relative">{ready && <WelcomeText />}</main>
-    </>
-  );
+export default function Page() {
+  return <HomeClient />;
 }

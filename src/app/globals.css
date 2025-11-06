@@ -89,3 +89,10 @@ h1, h2, h3 { font-weight: 700; }
   animation: badge-rotate 3s linear infinite;
 }
 @keyframes badge-rotate { to { transform: rotate(360deg); } }
+
+/* grade sutil de pontos (já é usada no ScrollFX com arbitrary styles, mas deixo a classe caso prefira) */
+.bg-dot-grid {
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.06;
+}
