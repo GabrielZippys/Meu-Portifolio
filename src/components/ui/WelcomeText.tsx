@@ -61,7 +61,7 @@ export default function WelcomeText() {
             className="mt-8 flex flex-wrap gap-4"
           >
             <a
-              href="#projetos"
+              href="/projetos"
               className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold text-black bg-cyan-400/90 hover:bg-cyan-300 shadow-lg shadow-cyan-500/20 backdrop-blur transition"
             >
               Ver Projetos
