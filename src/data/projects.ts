@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
     cover: '/images/projects/bravoform/cover.jpg',
     tags: ['Next.js', 'Firebase', 'Node.js', 'Automação', 'DataViz'],
     links: {
-      github: 'https://github.com/seu-usuario/bravoform', // ajuste para o link real
+      github: 'https://github.com/GabrielZippys/BRAVOFORM', // ajuste para o link real
       demo: 'https://sua-demo-bravoform.com', // opcional
     },
     challenge:
@@ -38,6 +38,18 @@ export const PROJECTS: Project[] = [
       'Com o BravoForm, gestores conseguem enxergar em tempo real quem respondeu, quando respondeu e o que foi registrado, com filtros por empresa, departamento, formulário e período. Processos que antes estavam espalhados em planilhas passam a ter histórico centralizado, pronto para auditorias e análises de performance. O módulo de Ordem de Serviço permite que uma não conformidade gere automaticamente uma OS com status, prioridade, anexos, comentários, SLA por etapa e rastreio visual em dashboards. Na prática, o sistema digitaliza processos, aumenta o controle interno, reduz retrabalho e cria uma cultura orientada a dados. O escopo do projeto soma mais de 400 horas de desenvolvimento fullstack, equivalente a um investimento teórico em torno de R$ 68.000,00 considerando uma taxa de R$ 170,00/h, incluindo interface, regras de negócio, segurança, integrações e estrutura analítica.',
     images: [
       '/images/projects/bravoform/cover.jpg',
+      '/images/projects/bravoform/01.jpg',
+      '/images/projects/bravoform/02.jpg',
+      '/images/projects/bravoform/03.jpg',
+      '/images/projects/bravoform/04.jpg',
+      '/images/projects/bravoform/05.jpg',
+      '/images/projects/bravoform/06.jpg',
+      '/images/projects/bravoform/07.jpg',
+      '/images/projects/bravoform/08.jpg',
+      '/images/projects/bravoform/09.jpg',
+      '/images/projects/bravoform/10.jpg',
+      '/images/projects/bravoform/11.jpg',
+
       // adicione aqui outras imagens da galeria quando quiser
     ],
   },

@@ -119,16 +119,6 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                   View code on GitHub
                 </Link>
               )}
-
-              {project.links?.demo && (
-                <Link
-                  href={project.links.demo}
-                  target="_blank"
-                  className="inline-flex items-center rounded-xl border border-cyan-400/40 bg-cyan-500/15 px-4 py-2 text-xs md:text-sm text-cyan-50 hover:bg-cyan-500/25 hover:border-cyan-300 transition"
-                >
-                  Open live demo
-                </Link>
-              )}
             </div>
           )}
         </header>
