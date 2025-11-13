@@ -50,30 +50,47 @@ export const PROJECTS: Project[] = [
       '/images/projects/bravoform/10.jpg',
       '/images/projects/bravoform/11.jpg',
 
-      // adicione aqui outras imagens da galeria quando quiser
     ],
   },
 
-  {
-    slug: 'agendador-pro',
-    title: 'Agendador PRO',
-    category: 'Automação & Scheduler desktop',
-    summary:
-      'Fila de automações, auto-update, logs e alertas; execução de bots/ETLs com robustez em ambiente desktop.',
-    cover: '/images/projects/agendador-bravo/cover.jpg',
-    tags: ['Python/Tkinter', 'Auto-update', 'Logs', 'ETL', 'Pentaho', 'Automação', 'DataViz'],
-    links: {
-      github: 'https://github.com/seu-usuario/agendador-bravo', // ajuste
-      // demo opcional
-    },
-    challenge:
-      'Centralizar e orquestrar execuções de automações e ETLs sem depender de intervenção manual constante, garantindo logs, alertas e reexecução confiável.',
-    solution:
-      'Aplicativo desktop em Python/Tkinter com fila de jobs, agendamento configurável, auto-update, integração com scripts de automação e ETLs.',
-    results:
-      'Redução de falhas por esquecimento, rastreabilidade total das execuções e operação mais previsível para o time que depende dos bots.',
-    images: ['/images/projects/agendador-bravo/01.jpg'],
+ {
+  slug: 'agendador-pro',
+  title: 'Agendador PRO',
+  summary:
+    'Aplicação desktop em Python para orquestrar bots, ETLs, scripts e backups em horários controlados, com fila visual, logs e alertas em tempo real.',
+  cover: '/images/projects/agendador-bravo/cover.jpg', // sua capa atual
+  tags: ['Python/Tkinter', 'Job scheduler', 'Automação', 'ETL', 'Logs', 'Desktop'],
+  category: 'Automation • Desktop',
+
+  links: {
+    github: 'https://github.com/GabrielZippys/Agendador-Bravo', // ajuste se quiser
+    // demo: 'https://link-da-demo.com',                      // opcional
   },
+
+  challenge:
+    'Antes do Agendador PRO, a execução de bots, scripts, relatórios e transformações ETL era feita de forma manual ou espalhada em agendadores diferentes (Task Scheduler, crons isolados, servidores específicos). Isso gerava dependência de pessoas para rodar processos críticos em horários fixos, aumentava o risco de esquecer execuções importantes e tornava difícil enxergar o que de fato estava rodando, quando falhou e por quê. Não havia uma fila centralizada de tarefas, nem um painel único de logs e histórico para apoiar o time técnico e as áreas de negócio.',
+
+  solution:
+    'O Agendador PRO consolida toda a automação em uma aplicação desktop robusta, escrita em Python 3.11+ com interface Tkinter customizada, pensada para rodar em servidores Windows ou máquinas que executam processos de backoffice. Cada tarefa é configurada com nome, caminho absoluto do executável ou script (.bat, .py, .exe, .ktr etc.), argumentos, pasta de trabalho, frequência (intervalo, horário fixo ou repetição), timeout e flags como executar em segundo plano e notificar em caso de falha. Por baixo, o app utiliza subprocess.Popen para disparar os processos, registra logs individuais por tarefa em disco, mantém um histórico estruturado com última execução, próxima prevista e status, e expõe uma fila visual com ícones de sucesso/erro em tempo real. O botão de interrupção permite matar um job em execução com segurança, controlando PID e estado via dicionário em memória. Painéis complementares exibem gráficos de falhas x sucessos, além de modos de simulação para testar erros sem impactar o ambiente.',
+
+  results:
+    'Com o Agendador PRO, o time passa a enxergar em tempo real tudo que está sendo executado: bots de atendimento, transformações Pentaho, scripts de backup, integrações Python e rotinas em Node.js. Processos que antes dependiam de alguém lembrar de abrir um arquivo agora são disparados automaticamente, com logs centralizados e alertas imediatos em caso de falha. Isso reduz erros humanos, garante regularidade na execução de tarefas críticas e aumenta a confiabilidade dos dados de backoffice. A área técnica ganha visibilidade sobre o que rodou, o que está em fila e o que falhou, e as áreas de negócio passam a contar com ETLs e relatórios mais estáveis. Em termos de investimento, o escopo equivale a centenas de horas de desenvolvimento fullstack (Python + UX desktop), incluindo interface, engine de agendamento, sistema de logs, atualização automática via manifest e preparação para notificações externas (e-mail, WhatsApp e APIs futuras).',
+
+  images: [
+    // você adiciona aqui os caminhos das imagens quando quiser
+     '/images/projects/agendador-bravo/01.jpg',
+     '/images/projects/agendador-bravo/02.png',
+     '/images/projects/agendador-bravo/03.png',
+     '/images/projects/agendador-bravo/04.png',
+     '/images/projects/agendador-bravo/05.png',
+     '/images/projects/agendador-bravo/06.png',
+     '/images/projects/agendador-bravo/07.png',
+     '/images/projects/agendador-bravo/08.png',
+     '/images/projects/agendador-bravo/09.png',
+
+  ],
+},
+
 
   {
     slug: 'embedded',
