@@ -93,24 +93,46 @@ export const PROJECTS: Project[] = [
 
 
   {
-    slug: 'embedded',
-    title: 'DashBoard Embedded',
-    category: 'Dashboards embarcados',
-    summary:
-      'Permite que dashboards do Power BI sejam embutidos de forma segura dentro do sistema web da empresa, respeitando regras de acesso por tipo de usuário.',
-    cover: '/images/projects/dashboard-embedded/cover.jpg',
-    tags: ['PowerBI', 'Next.js', 'Firebase', 'React', 'Backend/API', 'Banco de Dados'],
-    links: {
-      github: 'https://github.com/seu-usuario/acougue-mais', // ajuste se necessário
-    },
-    challenge:
-      'Levar dashboards para o ambiente interno da empresa com segurança, garantindo que cada colaborador veja apenas os dados que pode enxergar.',
-    solution:
-      'Implementação de camada backend para geração de tokens e integração com Power BI Embedded, controle de permissões e navegação com filtros.',
-    results:
-      'Maior adoção de dashboards, visão em tempo real diretamente no fluxo de trabalho do usuário e menos dependência de acesso direto ao portal do Power BI.',
-    images: ['/images/projects/dashboard-embedded/cover.jpg'],
+  slug: 'embedded',
+  title: 'Dashboard Embedded',
+  summary:
+    'Integração dos painéis do Power BI diretamente no sistema web interno, com segurança por usuário (RLS), autenticação via Firebase e experiência responsiva — eliminando links externos e centralizando indicadores no fluxo de trabalho da empresa.',
+  cover: '/images/projects/dashboard-embedded/cover.jpg',
+  tags: [
+    'PowerBI',
+    'Next.js',
+    'TypeScript',
+    'TailwindCSS',
+    'API Routes',
+    'Firebase Auth',
+    'RLS',
+    'Security'
+  ],
+  links: {
+    // ajuste se quiser apontar para o repo real:
+    github: '',
+    demo: '/projetos/embedded'
   },
+
+  // --- Parte "gestores": por que fazer / dor de negócio
+  challenge:
+    'Gestores precisavam abrir dashboards do Power BI por links separados, sem controle de contexto do sistema e com pouca segurança por perfil. Isso gerava retrabalho, acessos indevidos e baixa adoção: cada área tinha uma forma de ver métricas, e o TI virava gargalo para distribuir relatórios. Era necessário embutir os painéis no próprio sistema da empresa, respeitando o que cada usuário pode ver (RLS) e eliminando a dependência de múltiplos acessos.',
+
+  // --- Parte técnica condensada: arquitetura e fluxo de embed
+  solution:
+    'O projeto embute relatórios do Power BI dentro do app Next.js (App Router) usando o SDK powerbi-client. O front abre /dashboards/[id] e chama a rota /api/pbi/embed?dashboardId=... com cache: "no-store". A API valida o usuário autenticado (Firebase Auth), injeta o e-mail em header seguro (x-user-email) e consulta as permissões/roles para gerar o token de embed com RLS (effectiveUsername). A resposta contém embedUrl, reportId e accessToken. No client, o SDK faz pbi.embed(...) com navegação de páginas habilitada e filtros ocultos. A solução é 100% responsiva, suporta ?debug=1 para inspecionar dados de RLS (dataset/workspace/username) e organiza múltiplos dashboards por ID, permitindo evolução sem acoplamento. Toda a comunicação sensível fica no servidor (API Routes), mantendo segredos fora do browser.',
+
+  // --- Impacto/resultado para o negócio
+  results:
+    'Indicadores passaram a viver no mesmo ambiente onde o time trabalha, aumentando adoção e velocidade de decisão. O controle por usuário/loja/área via RLS reduziu riscos de acesso indevido. O TI ganhou governança (token sempre novo, sem query strings sensíveis), e a liderança passou a consultar vendas, qualidade e operações em tempo real sem abrir outros sistemas. Resultado prático: menos erro manual, mais foco na gestão e modernização do ambiente interno.',
+
+  // adicione as imagens quando quiser (pode começar só com a cover)
+  images: [
+    '/images/projects/dashboard-embedded/01.jpg',
+    '/images/projects/dashboard-embedded/02.jpg',
+    '/images/projects/dashboard-embedded/03.jpg'
+  ]
+},
 ];
 
 export default PROJECTS;
