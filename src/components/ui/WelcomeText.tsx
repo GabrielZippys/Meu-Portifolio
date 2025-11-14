@@ -37,12 +37,12 @@ export default function WelcomeText() {
         transition={{ duration: 0.9, ease: easeOutBezier, delay: 0.15 }}
         className="
           pointer-events-none
-          absolute top-8
-          right-[-36px] md:right-[-20px] lg:right-[1.5vw] xl:right-[3.5vw]
+          absolute top-[201px]
+          right-[-36px] md:right-[-20px] lg:right-[2.5vw] xl:right-[11.5vw]
           w-[640px] h-[640px]
           md:w-[760px] md:h-[760px]
-          xl:w-[880px] xl:h-[880px]
-          2xl:w-[960px] 2xl:h-[960px]
+          xl:w-[8180px] xl:h-[880px]
+          2xl:w-[640px] 2xl:h-[640px]
         "
       >
         <TechCanvas />

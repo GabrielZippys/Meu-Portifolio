@@ -96,3 +96,21 @@ h1, h2, h3 { font-weight: 700; }
   background-size: 18px 18px;
   opacity: 0.06;
 }
+
+:root {
+  --header-h: 64px;  /* header mobile */
+  --footer-h: 44px;  /* footer mobile */
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-h: 72px;  /* header desktop */
+    --footer-h: 48px;  /* footer desktop */
+  }
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: 0.06;
+}
