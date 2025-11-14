@@ -1,110 +1,130 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import TechLogos from './TechLogos';
+import { motion, Variants } from 'framer-motion';
+import TechCanvas from '@/components/ui/TechCanvas';
+import TechLogos from '@/components/ui/TechLogos';
 
-const TechCanvas = dynamic(() => import('./TechCanvas'), { ssr: false });
+const easeOutBezier = [0.16, 1, 0.3, 1] as const;
 
-// bezier que imita o "easeOut"
-const easeOutBezier: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const fadeUp: Variants = {
+const fadeUp = (i = 0): Variants => ({
   hidden: { opacity: 0, y: 30 },
-  show: (i: number = 1) => ({
+  show: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.8,
-      ease: easeOutBezier,
-      delay: 0.1 * i,
-    },
-  }),
-};
+    transition: { duration: 0.8, ease: easeOutBezier, delay: 0.1 * i },
+  },
+});
 
 export default function WelcomeText() {
   return (
-    <section className="relative min-h-[75vh] md:min-h-[85vh] flex items-center overflow-hidden">
-      {/* fundos sutis se você tiver essas utilities no CSS */}
-      <div className="absolute inset-0 bg-gradient" />
+    <section
+      className="
+        relative
+        min-h-[calc(100svh-5rem)]
+        md:min-h-[calc(100svh-5rem)]
+        flex items-center
+        overflow-x-clip
+      "
+    >
+      {/* Camadas de fundo */}
       <div className="absolute inset-0 bg-grid" />
+      <div className="absolute inset-0 bg-gradient" />
 
-      <div className="relative container mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-        {/* Coluna: Texto */}
+      {/* 3D – wrapper absoluto, mais largo/alto e deslocado à direita */}
+      <motion.div
+        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.9, ease: easeOutBezier, delay: 0.15 }}
+        className="
+          pointer-events-none
+          absolute top-8
+          right-[-36px] md:right-[-20px] lg:right-[1.5vw] xl:right-[3.5vw]
+          w-[640px] h-[640px]
+          md:w-[760px] md:h-[760px]
+          xl:w-[880px] xl:h-[880px]
+          2xl:w-[960px] 2xl:h-[960px]
+        "
+      >
+        <TechCanvas />
+      </motion.div>
+
+      {/* Conteúdo */}
+      <div className="relative container mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+        {/* Coluna de texto */}
         <div className="order-2 md:order-1">
           <motion.h1
-            variants={fadeUp}
+            variants={fadeUp(0)}
             initial="hidden"
             animate="show"
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
-              Bem-vindo ao meu Portfólio
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-200 to-indigo-200">
+              Bem-vindo ao meu
+              <br />
+              Portfólio
             </span>
           </motion.h1>
 
           <motion.p
-            variants={fadeUp}
+            variants={fadeUp(1)}
             initial="hidden"
             animate="show"
-            custom={2}
-            className="mt-4 text-zinc-300/90 text-lg sm:text-xl max-w-xl"
+            className="mt-4 text-zinc-300/90 text-lg max-w-xl"
           >
             Tecnologia • Automação • Inovação — soluções de ponta com foco em resultado.
           </motion.p>
 
           <motion.div
-            variants={fadeUp}
+            variants={fadeUp(2)}
             initial="hidden"
             animate="show"
-            custom={3}
             className="mt-8 flex flex-wrap gap-4"
           >
             <a
               href="/projetos"
-              className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold text-black bg-cyan-400/90 hover:bg-cyan-300 shadow-lg shadow-cyan-500/20 backdrop-blur transition"
+              className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold bg-cyan-500/90 hover:bg-cyan-500 text-black transition"
             >
               Ver Projetos
             </a>
-           <a
-  href="/sobre"   // era "#sobre"
-  className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold border border-white/15 text-zinc-200 hover:bg-white/10 transition"
->
-  Sobre mim
-</a>
 
+            <a
+              href="/sobre"
+              className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] text-zinc-200 transition"
+            >
+              Sobre mim
+            </a>
           </motion.div>
 
-          {/* Chips (UL isolada) */}
+          {/* Chips */}
           <motion.ul
-            variants={fadeUp}
+            variants={fadeUp(3)}
             initial="hidden"
             animate="show"
-            custom={4}
             className="mt-6 flex flex-wrap gap-2 text-sm text-zinc-400"
           >
-            {['Next.js', 'Tailwind', 'Firebase', 'Automação', 'DataViz'].map((s) => (
-              <li key={s} className="rounded-full border border-white/10 px-3 py-1">
-                {s}
+            {['Next.js', 'Tailwind', 'Firebase', 'Automação', 'DataViz'].map((t) => (
+              <li
+                key={t}
+                className="rounded-full border border-white/10 px-3 py-1 bg-white/5"
+              >
+                {t}
               </li>
             ))}
           </motion.ul>
 
-          {/* Logos (UL própria, fora da UL de chips) */}
-          <div className="mt-4">
+          {/* Logos */}
+          <motion.div
+            variants={fadeUp(4)}
+            initial="hidden"
+            animate="show"
+            className="mt-4"
+          >
             <TechLogos />
-          </div>
+          </motion.div>
         </div>
 
-        {/* Coluna: 3D */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          className="order-1 md:order-2"
-        >
-          <TechCanvas />
-        </motion.div>
+        {/* A outra coluna fica vazia só para reservar espaço no grid em telas grandes */}
+        <div className="order-1 md:order-2" />
       </div>
     </section>
   );

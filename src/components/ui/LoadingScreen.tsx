@@ -1,61 +1,50 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const stepsBase = [
-  '> Carregando projeto...',
-  '> Conectando ao Firestore...',
-  '> Renderizando animações...',
-  '> Pronto!',
+const STEPS = [
+  'Carregando o projeto…',
+  'Conectando aos serviços…',
+  'Renderizando interface…',
 ];
 
-export default function LoadingScreen({ onFinish }: { onFinish: () => void }) {
-  const steps = useMemo(() => stepsBase, []);
-  const [index, setIndex] = useState(0);
+export default function LoadingScreen({ onFinish }: { onFinish?: () => void }) {
+  const [i, setI] = useState(0);
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const tick = setInterval(() => {
-      setIndex(i => {
-        if (i < steps.length - 1) return i + 1;
-        clearInterval(tick);
-        setTimeout(() => {
-          setVisible(false);
-          onFinish();
-        }, 500);
-        return i;
-      });
-      return () => clearInterval(tick);
-    }, 650);
-    return () => clearInterval(tick);
-  }, [onFinish, steps.length]);
-
-  if (!visible) return null;
+    const rot = setInterval(() => setI((v) => (v + 1) % STEPS.length), 700);
+    // fecha sozinho em ~2.2s
+    const close = setTimeout(() => {
+      setVisible(false);
+      onFinish?.();
+    }, 2200);
+    return () => {
+      clearInterval(rot);
+      clearTimeout(close);
+    };
+  }, [onFinish]);
 
   return (
     <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.6 }}
-        className="fixed inset-0 z-[60] flex items-center justify-center bg-black/95 text-green-400 font-mono text-sm"
-      >
-        <div className="leading-snug whitespace-pre">
-          {steps.slice(0, index + 1).map((line, i) => (
-            <div key={i} className={i === index ? 'type-caret' : ''}>
-              {line}
+      {visible && (
+        <motion.div
+          className="fixed inset-0 z-[9999] bg-black/85 backdrop-blur-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, transition: { duration: 0.35 } }}
+        >
+          <div className="absolute inset-0 grid place-items-center">
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-4 shadow-2xl">
+              <div className="flex items-center gap-3">
+                <span className="size-2 rounded-full bg-cyan-400 animate-pulse" />
+                <span className="font-mono text-sm text-zinc-200">{STEPS[i]}</span>
+              </div>
             </div>
-          ))}
-          <button
-            onClick={() => { setVisible(false); onFinish(); }}
-            className="mt-4 inline-flex items-center rounded-md border border-green-400/30 px-3 py-1 text-green-300 hover:bg-green-400/10 transition pointer-events-auto"
-          >
-            Pular
-          </button>
-        </div>
-      </motion.div>
+          </div>
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 }
