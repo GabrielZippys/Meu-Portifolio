@@ -27,8 +27,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const project = PROJECTS.find((p) => p.slug === slug);
   if (!project) return {};
 
-  const title = `${project.title} — Projects by Gabriel Oliveira`;
-  const description = project.summary;
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get('lang')?.value as Locale | undefined;
+  const lang: Locale = langCookie === 'en' || langCookie === 'pt' ? langCookie : 'pt';
+  const dict = getDictionary(lang);
+  const copy = project.copy[lang] ?? project.copy.pt;
+
+  const title = `${copy.title} — ${dict.projectsPage.title}`;
+  const description = copy.summary;
 
   return {
     title,
@@ -57,9 +63,11 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
   const langCookie = cookieStore.get('lang')?.value as Locale | undefined;
   const lang: Locale = langCookie === 'en' || langCookie === 'pt' ? langCookie : 'pt';
   const dict = getDictionary(lang);
+  const copy = project.copy[lang] ?? project.copy.pt;
 
   return (
     <main className="container mx-auto px-6 pb-24 pt-20">
+
       {/* topo / breadcrumb */}
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4">
         <Link
@@ -82,18 +90,18 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
         <header>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
-              {project.title}
+              {copy.title}
             </span>
           </h1>
 
-          {project.category && (
+          {copy.category && (
             <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300/70">
-              {project.category}
+              {copy.category}
             </p>
           )}
 
           <p className="mt-4 text-sm md:text-base text-zinc-300/90 leading-relaxed">
-            {project.summary}
+            {copy.summary}
           </p>
 
           {/* Stack / tags */}
@@ -135,21 +143,15 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
         <div className="relative">
           <div className="pointer-events-none absolute -inset-6 -z-10 rounded-3xl bg-gradient-to-br from-cyan-500/15 via-sky-500/8 to-indigo-500/10 blur-2xl" />
           <div className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/70 shadow-[0_24px_80px_rgba(0,0,0,0.6)]">
-            <Image
-              src={project.cover}
-              alt={project.title}
-              fill
-              priority={false}
-              className="object-cover"
-            />
+            <Image src={project.cover} alt={copy.title} fill priority={false} className="object-cover" />
           </div>
         </div>
       </section>
 
       {/* BLOCO: desafio / solução / resultados */}
-      {(project.challenge || project.solution || project.results) && (
+      {(copy.challenge || copy.solution || copy.results) && (
         <section className="mx-auto mt-12 max-w-5xl space-y-4">
-          {project.challenge && (
+          {copy.challenge && (
             <article className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 md:px-6 md:py-5">
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6">
                 <div className="md:w-40 shrink-0">
@@ -158,13 +160,13 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                   </p>
                 </div>
                 <p className="text-xs md:text-sm text-zinc-300/90 leading-relaxed">
-                  {project.challenge}
+                  {copy.challenge}
                 </p>
               </div>
             </article>
           )}
 
-          {project.solution && (
+          {copy.solution && (
             <article className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 md:px-6 md:py-5">
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6">
                 <div className="md:w-40 shrink-0">
@@ -173,13 +175,13 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                   </p>
                 </div>
                 <p className="text-xs md:text-sm text-zinc-300/90 leading-relaxed">
-                  {project.solution}
+                  {copy.solution}
                 </p>
               </div>
             </article>
           )}
 
-          {project.results && (
+          {copy.results && (
             <article className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 md:px-6 md:py-5">
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6">
                 <div className="md:w-40 shrink-0">
@@ -188,7 +190,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                   </p>
                 </div>
                 <p className="text-xs md:text-sm text-zinc-300/90 leading-relaxed">
-                  {project.results}
+                  {copy.results}
                 </p>
               </div>
             </article>
