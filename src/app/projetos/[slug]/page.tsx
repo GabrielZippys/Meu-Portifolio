@@ -3,9 +3,12 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 import PROJECTS from '@/data/projects';
 import Gallery from '@/components/ui/Gallery';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/i18n';
 
 // Slugs gerados estaticamente
 export function generateStaticParams() {
@@ -50,6 +53,11 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
   const project = PROJECTS.find((p) => p.slug === slug);
   if (!project) notFound();
 
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get('lang')?.value as Locale | undefined;
+  const lang: Locale = langCookie === 'en' || langCookie === 'pt' ? langCookie : 'pt';
+  const dict = getDictionary(lang);
+
   return (
     <main className="container mx-auto px-6 pb-24 pt-20">
       {/* topo / breadcrumb */}
@@ -61,11 +69,11 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
           <span aria-hidden="true" className="mr-1">
             ←
           </span>
-          Back to projects
+          {dict.projectDetails.backToProjects}
         </Link>
 
         <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.2em] text-zinc-400">
-          Case study
+          {dict.projectDetails.caseStudy}
         </span>
       </div>
 
@@ -92,7 +100,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
           {project.tags?.length > 0 && (
             <div className="mt-5">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
-                Tech stack & focus
+                {dict.projectDetails.techStack}
               </p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {project.tags.map((t) => (
@@ -116,7 +124,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
                   target="_blank"
                   className="inline-flex items-center rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2 text-xs md:text-sm text-zinc-200 hover:bg-white/[0.1] transition"
                 >
-                  View code on GitHub
+                  {dict.projectDetails.viewCode}
                 </Link>
               )}
             </div>
@@ -139,7 +147,6 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
       </section>
 
       {/* BLOCO: desafio / solução / resultados */}
-            {/* BLOCO: challenge / solution / outcomes em cards "deitados" */}
       {(project.challenge || project.solution || project.results) && (
         <section className="mx-auto mt-12 max-w-5xl space-y-4">
           {project.challenge && (
@@ -147,7 +154,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6">
                 <div className="md:w-40 shrink-0">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-                    Challenge
+                    {dict.projectDetails.challenge}
                   </p>
                 </div>
                 <p className="text-xs md:text-sm text-zinc-300/90 leading-relaxed">
@@ -162,7 +169,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6">
                 <div className="md:w-40 shrink-0">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-                    Solution
+                    {dict.projectDetails.solution}
                   </p>
                 </div>
                 <p className="text-xs md:text-sm text-zinc-300/90 leading-relaxed">
@@ -177,7 +184,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
               <div className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6">
                 <div className="md:w-40 shrink-0">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-300/80">
-                    Outcomes &amp; impact
+                    {dict.projectDetails.outcomes}
                   </p>
                 </div>
                 <p className="text-xs md:text-sm text-zinc-300/90 leading-relaxed">
@@ -189,16 +196,15 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
         </section>
       )}
 
-
       {/* GALERIA */}
       {project.images && project.images.length > 0 && (
         <section className="mx-auto mt-14 max-w-5xl">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-base md:text-lg font-semibold text-zinc-100">
-              Product gallery
+              {dict.projectDetails.productGallery}
             </h2>
             <p className="text-xs text-zinc-400">
-              Screens that highlight UX, workflows and analytics.
+              {dict.projectDetails.galleryDescription}
             </p>
           </div>
 
@@ -217,7 +223,7 @@ export default async function ProjectDetailsPage({ params }: PageProps) {
           <span aria-hidden="true" className="mr-1">
             ←
           </span>
-          Back to all projects
+          {dict.projectDetails.backToAllProjects}
         </Link>
       </div>
     </main>

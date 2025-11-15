@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, type Variants } from 'framer-motion';
+import { useLang } from '@/components/ui/LangProvider';
 
 type Tech = {
   key: string;
@@ -36,13 +37,15 @@ const cn = (...classes: (string | false | null | undefined)[]) =>
   classes.filter(Boolean).join(' ');
 
 export default function TechLogos() {
+  const { dict } = useLang();
+
   return (
     <motion.ul
       variants={fadeUp}
       initial="hidden"
       animate="show"
       className="mt-6 flex flex-wrap gap-3"
-      aria-label="Tecnologias em que sou proficiente"
+      aria-label={dict.homePage.techListAria}
     >
       {TECHS.map((t, i) => (
         <motion.li key={t.key} variants={fadeUp} custom={i + 1}>

@@ -1,18 +1,23 @@
 // src/components/ui/ProjectCard.tsx
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '@/data/projects';
+import { useLang } from '@/components/ui/LangProvider';
 
 type Props = {
   project: Project;
 };
 
 export default function ProjectCard({ project }: Props) {
+  const { dict } = useLang();
+
   return (
     <Link
       href={`/projetos/${project.slug}`}
       className="group block h-full"
-      aria-label={`Ver detalhes do projeto ${project.title}`}
+      aria-label={`${dict.projectsPage.cardAriaLabel} ${project.title}`}
     >
       <article className="h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] shadow-lg shadow-black/40 transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-cyan-400/60">
         {/* Capa */}

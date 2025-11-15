@@ -3,6 +3,7 @@
 
 import { motion, useScroll, useSpring } from 'framer-motion';
 import ScrollFX from './ScrollFX';
+import { useLang } from '@/components/ui/LangProvider';
 
 const easeOut: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -16,28 +17,9 @@ export default function AboutStory() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, mass: 0.2 });
 
-  const blocks = [
-    {
-      h: 'Começo e curiosidade',
-      p: 'No começo eu era apenas uma criança sempre curiosa ganhei meu primeiro computador um positivo Celeron que foi minha porta de entrada aonde pude aprender a navegar na internet e usar o Windows e baixar jogos pela internet isso tudo com 6 anos me apaixonei por computador e tecnologia dai pra frente nunca parei de procurar e descobrir o que o mundo da tecnologia pode proporcionar desde criar jogos até baixar diferentes Sistemas Operacionais para meu computador e com isso nasceu o amor pela programação e até hoje continua.',
-    },
-    {
-      h: 'Fullstack na prática',
-      p: 'Com Next.js, Node e Firebase, passei a entregar produtos completos: do backend ao front, sempre com foco em performance, segurança e DX. O objetivo é claro: menos atrito, mais resultado.',
-    },
-    {
-      h: 'Automação e dados',
-      p: 'Criei agendadores robustos, integrações com APIs e dashboards que contam histórias. A regra é medir, aprender e iterar rápido — de logs confiáveis a visualizações que geram decisão.',
-    },
-    {
-      h: 'Experimentos visuais',
-      p: 'Animações com Framer Motion e cenas 3D com Three.js elevam a experiência. Quando bem dosadas, trazem clareza e personalidade sem pesar na navegação.',
-    },
-    {
-      h: 'Hoje',
-      p: 'Sigo construindo produtos que eliminam desperdício e geram impacto. Se você busca automação e uma camada de UX que converte, vamos conversar.',
-    },
-  ];
+  const { dict } = useLang();
+
+  const blocks = dict.sobrePage.blocks;
 
   return (
     <>
@@ -55,16 +37,15 @@ export default function AboutStory() {
         <header className="pt-28 pb-10">
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
-              Minha história
+              {dict.sobrePage.title}
             </span>
           </h1>
           <p className="mt-4 max-w-2xl text-zinc-300/90">
-            Um pouco da trilha até aqui — como cheguei em automação, dashboards e produtos
-            que reduzem operação e aumentam resultado.
+            {dict.sobrePage.subtitle}
           </p>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            {['Automação', 'Dashboards', 'Integrações', 'UX com animações'].map((t) => (
+            {dict.sobrePage.tags.map((t) => (
               <span
                 key={t}
                 className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-sm text-zinc-300"
@@ -103,12 +84,13 @@ export default function AboutStory() {
               href="/#projetos"
               className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold text-black bg-cyan-400/90 hover:bg-cyan-300 shadow-lg shadow-cyan-500/20 transition"
             >
-              Ver projetos
+              {dict.sobrePage.ctaProjects}
             </a>
             <a
-             href="/"              className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold border border-white/15 text-zinc-200 hover:bg-white/10 transition"
+              href="/"
+              className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold border border-white/15 text-zinc-200 hover:bg-white/10 transition"
             >
-              Voltar para a Home
+              {dict.sobrePage.ctaBackHome}
             </a>
           </motion.section>
         </div>

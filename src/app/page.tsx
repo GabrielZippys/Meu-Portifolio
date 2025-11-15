@@ -1,11 +1,21 @@
 import type { Metadata } from 'next';
+import { cookies } from 'next/headers';
 import HomeClient from '@/components/ui/HomeClient';
+import type { Locale } from '@/lib/i18n';
+import { getDictionary } from '@/lib/i18n';
 
-export const metadata: Metadata = {
-  title: 'Gabriel Oliveira | Fullstack Dev',
-  description: 'Portfólio com projetos de automações, dashboards e Firebase',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get('lang')?.value as Locale | undefined;
+  const lang: Locale = langCookie === 'en' || langCookie === 'pt' ? langCookie : 'pt';
+  const dict = getDictionary(lang);
 
-export default function Page() {
+  return {
+    title: dict.homePage.metaTitle,
+    description: dict.homePage.metaDescription,
+  };
+}
+
+export default async function Page() {
   return <HomeClient />;
 }

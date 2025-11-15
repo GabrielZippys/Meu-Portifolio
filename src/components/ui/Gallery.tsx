@@ -3,10 +3,12 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useLang } from '@/components/ui/LangProvider';
 
 type Props = { images: string[] };
 
 export default function Gallery({ images }: Props) {
+  const { dict } = useLang();
   const [open, setOpen] = useState(false);
   const [idx, setIdx] = useState(0);
 
@@ -54,21 +56,21 @@ export default function Gallery({ images }: Props) {
                 onClick={() => setIdx((i) => (i - 1 + images.length) % images.length)}
                 className="rounded-xl border border-white/20 bg-white/10 px-4 py-2 text-sm text-white hover:bg-white/15"
               >
-                ← Anterior
+                ← {dict.common.previous}
               </button>
               <button
                 onClick={() => setIdx((i) => (i + 1) % images.length)}
                 className="rounded-xl border border-white/20 bg-white/10 px-4 py-2 text-sm text-white hover:bg-white/15"
               >
-                Próxima →
+                {dict.common.next} →
               </button>
             </div>
             <button
               onClick={() => setOpen(false)}
               className="absolute right-0 top-0 rounded-bl-xl border border-white/20 bg-white/10 px-3 py-1 text-sm text-white hover:bg-white/15"
-              aria-label="Fechar"
+              aria-label={dict.common.close}
             >
-              Fechar ✕
+              {dict.common.close}
             </button>
           </div>
         </div>

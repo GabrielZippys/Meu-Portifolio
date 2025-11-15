@@ -3,6 +3,7 @@
 import { motion, Variants } from 'framer-motion';
 import TechCanvas from '@/components/ui/TechCanvas';
 import TechLogos from '@/components/ui/TechLogos';
+import { useLang } from '@/components/ui/LangProvider';
 
 const easeOutBezier = [0.16, 1, 0.3, 1] as const;
 
@@ -16,6 +17,8 @@ const fadeUp = (i = 0): Variants => ({
 });
 
 export default function WelcomeText() {
+  const { dict } = useLang();
+
   return (
     <section
       className="
@@ -59,9 +62,7 @@ export default function WelcomeText() {
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-200 to-indigo-200">
-              Bem-vindo ao meu
-              <br />
-              Portfólio
+              {dict.homePage.title}
             </span>
           </motion.h1>
 
@@ -71,7 +72,7 @@ export default function WelcomeText() {
             animate="show"
             className="mt-4 text-zinc-300/90 text-lg max-w-xl"
           >
-            Tecnologia • Automação • Inovação — soluções de ponta com foco em resultado.
+            {dict.homePage.subtitle}
           </motion.p>
 
           <motion.div
@@ -84,14 +85,14 @@ export default function WelcomeText() {
               href="/projetos"
               className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold bg-cyan-500/90 hover:bg-cyan-500 text-black transition"
             >
-              Ver Projetos
+              {dict.homePage.ctaProjects}
             </a>
 
             <a
               href="/sobre"
               className="inline-flex items-center rounded-2xl px-6 py-3 font-semibold border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] text-zinc-200 transition"
             >
-              Sobre mim
+              {dict.homePage.ctaAbout}
             </a>
           </motion.div>
 
@@ -102,7 +103,7 @@ export default function WelcomeText() {
             animate="show"
             className="mt-6 flex flex-wrap gap-2 text-sm text-zinc-400"
           >
-            {['Next.js', 'Tailwind', 'Firebase', 'Automação', 'DataViz'].map((t) => (
+            {dict.homePage.tags.map((t) => (
               <li
                 key={t}
                 className="rounded-full border border-white/10 px-3 py-1 bg-white/5"
