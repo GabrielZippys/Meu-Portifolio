@@ -21,6 +21,12 @@ export const dictionaries = {
       tags: ['Next.js', 'Tailwind', 'Firebase', 'Automação', 'DataViz'],
       techListAria: 'Tecnologias em que sou proficiente',
     },
+    loading: {
+      steps: ['Carregando o projeto…', 'Conectando aos serviços…', 'Renderizando interface…'],
+      detectingLocation: 'Detectando de onde você está acessando…',
+      locationDetected: 'Conectado de {country}',
+      locationFallback: 'Não conseguimos identificar sua localização',
+    },
     projectsPage: {
       title: 'Projetos',
       metaTitle: 'Projetos – Gabriel Oliveira',
@@ -115,6 +121,12 @@ export const dictionaries = {
       ctaAbout: 'About Me',
       tags: ['Next.js', 'Tailwind', 'Firebase', 'Automation', 'DataViz'],
       techListAria: 'Technologies I am proficient in',
+    },
+    loading: {
+      steps: ['Booting the project…', 'Linking services…', 'Rendering the interface…'],
+      detectingLocation: 'Detecting where you are connecting from…',
+      locationDetected: 'Connected from {country}',
+      locationFallback: 'We could not detect your location',
     },
     projectsPage: {
       title: 'Projects',

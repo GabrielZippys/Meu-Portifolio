@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieStore = await cookies();
   const langCookie = cookieStore.get('lang')?.value as Locale | undefined;
-  const lang: Locale = langCookie === 'en' || langCookie === 'pt' ? langCookie : 'pt';
+  const lang: Locale = langCookie === 'en' || langCookie === 'pt' ? langCookie : 'en';
   const dict = getDictionary(lang);
 
   return (
