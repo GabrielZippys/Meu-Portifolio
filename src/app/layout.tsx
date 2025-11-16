@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa6';
 import { cookies } from 'next/headers';
-
+import { Analytics } from "@vercel/analytics/next"
 import LangProvider from '@/components/ui/LangProvider';
 import LangSwitch from '@/components/ui/LangSwitch';
 import type { Locale } from '@/lib/i18n';
@@ -149,6 +149,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </div>
           </footer>
         </LangProvider>
+
+        <Analytics />
       </body>
     </html>
   );
