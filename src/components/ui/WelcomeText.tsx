@@ -40,11 +40,13 @@ export default function WelcomeText() {
         transition={{ duration: 0.9, ease: easeOutBezier, delay: 0.15 }}
         className="
           pointer-events-none
-          absolute top-[201px]
-          right-[-36px] md:right-[-20px] lg:right-[2.5vw] xl:right-[11.5vw]
-          w-[640px] h-[640px]
-          md:w-[760px] md:h-[760px]
-          xl:w-[8180px] xl:h-[880px]
+          absolute
+          top-[110px] sm:top-[160px] lg:top-[180px]
+          right-[-140px] sm:right-[-36px] md:right-[-20px] lg:right-[2.5vw] xl:right-[11.5vw]
+          w-[280px] h-[280px]
+          sm:w-[420px] sm:h-[420px]
+          md:w-[640px] md:h-[640px]
+          xl:w-[880px] xl:h-[880px]
           2xl:w-[640px] 2xl:h-[640px]
         "
       >
