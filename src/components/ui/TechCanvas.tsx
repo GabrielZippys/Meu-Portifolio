@@ -60,7 +60,7 @@ export default function TechCanvas() {
           rotation={[0, 0.3, 0]}
           polar={[-0.3, 0.3]}
           azimuth={[-0.6, 0.6]}
-          config={{ mass: 1, tension: 170, friction: 26 }}
+          speed={1.5}
         >
           <Suspense fallback={null}>
             <Knot />
